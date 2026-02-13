@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="fr" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOSSA DAVID | Fullstack Dev</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+   <style>
+        :root { --transition-speed: 0.5s; }
+        body { transition: background-color var(--transition-speed), color var(--transition-speed); scroll-behavior: smooth; }
+        
+         .nav-link{
+            font-size: 1.2rem ;
+            font-weight: bold;
+         }
+
+        /* Carrousel Custom */
+        .carousel-item { height: 80vh; min-height: 400px; background-size: cover; background-position: center; }
+        .carousel-caption { 
+            background: rgba(0, 0, 0, 0.6); 
+            border-radius: 15px; 
+            padding: 2rem;
+            bottom: 25%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .carousel-item.active .carousel-caption { opacity: 1; transform: translateY(0); }
+
+        #txt-about-p{
+            font-size: 1.2rem ;
+        }
+
+        /* Kanban Style */
+        .kanban-col { background: rgba(150, 150, 150, 0.1); border-radius: 10px; padding: 15px; min-height: 200px; }
+        .kanban-card { background: var(--bs-body-bg); border-left: 5px solid #0d6efd; margin-bottom: 10px; padding: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+   
+           /* Bouton Remonter */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            z-index: 1000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Social Icons */
+        .social-link { font-size: 2rem; transition: 0.3s; }
+        .social-link:hover { color: #0d6efd; transform: scale(1.2); }
+   
+        .card { transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+         
+        .ai-response ul { text-align: left; margin-top: 10px; }
+        .ai-response strong { color: #0d6efd; }
+
+ .skill-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+}
+
+.skill-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+}
+
+.icon-box {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+    border-radius: 6px;
+}
+
+/*lettre par lettre*/
+.carousel-item {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-caption {
+    bottom: 35%; /* Centre mieux le texte verticalement */
+}
+
+/* Effet clignotant du curseur */
+.cursor {
+    font-weight: thin;
+    color: var(--bs-primary);
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Style des boutons pour plus de modernité */
+.btn-primary {
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+}
+
+/* carrousel infini */
+
+/* Animation du slider infini */
+.logos-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 10px 0;
+    white-space: nowrap;
+}
+
+.logos-track {
+    display: inline-flex;
+    align-items: center;
+    animation: scroll-mobile 20s linear infinite;
+}
+
+/* Couleurs spécifiques pour les icônes Bootstrap */
+.text-purple { color: #7952b3; }
+
+@keyframes scroll-mobile {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* On décale de la moitié puisqu'on a doublé la liste */
+    }
+}
+
+/* Optionnel : dégradé sur les bords pour l'effet de fondu */
+.logos-slider::before, .logos-slider::after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 50px;
+    z-index: 2;
+}
+.logos-slider::before {
+    left: 0;
+    background: linear-gradient(to right, white, transparent);
+}
+.logos-slider::after {
+    right: 0;
+    background: linear-gradient(to left, white, transparent);
+}
+
+/* projet  */
+
+/* Style des cartes projets */
+.project-card {
+    background-color: var(--bs-body-bg);
+    border: 1px solid rgba(0,0,0,0.05) !important;
+    border-radius: 15px;
+}
+
+/* En mode sombre, on rend la bordure plus visible */
+[data-bs-theme="dark"] .project-card {
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    background-color: rgba(255,255,255,0.02);
+}
+
+.project-image-container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.1);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+}
+
+.project-card .card-body {
+    transition: background-color 0.3s ease;
+}
+
+.stack-icons i {
+    font-size: 1.2rem;
+}
+
+/* Boutons arrondis modernes */
+.btn-outline-primary {
+    border-width: 2px;
+    font-weight: 600;
+}
+
+ </style>
+</head>
+<body id="top">
+
+    <button id="backToTop" class="btn btn-primary">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+    <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="portfolio.html">YOSSA DAVID</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    
+                    <li class="nav-item"><a class="nav-link" href="#propos" id="nav-propos">a propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#competences" id="nav-competenes">Compétences</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projets" id="nav-projets">Projets</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact" id="nav-contacts">Contact</a></li>
+                    <li class="nav-item d-flex align-items-center ms-lg-3">
+                        <button class="btn btn-outline-secondary btn-sm me-2" id="langToggle">EN</button>
+                        <button class="btn btn-link text-body p-0" id="themeToggle">
+                            <i class="bi bi-sun-fill" id="themeIcon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072');">
+            <div class="carousel-caption">
+                <h1 class="text-white fw-bold display-2"><span id="type-welcome"></span><span class="cursor">|</span></h1>
+                <p class="lead text-white-50">YOSSA DAVID - Développeur Fullstack</p>
+                <a href="#contact" class="btn btn-primary btn-lg px-4 mt-3 shadow" id="txt-cta-contact">Me contacter</a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=2069');">
+            <div class="carousel-caption">
+                <h1 class="text-white fw-bold display-2"><span id="type-vision"></span><span class="cursor">|</span></h1>
+                <p class="lead text-white-50">Des applications robustes et scalables.</p>
+                <a href="#projets" class="btn btn-outline-light btn-lg px-4 mt-3" id="txt-cta-work">Voir mes travaux</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <section class="container py-5 reveal" id="propos">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2 class="fw-bold mb-4" id="txt-about-title">À Propos</h2>
+                <p id="txt-about-p">
+                    Développeur Fullstack passionné et titulaire d'une Licence en Informatique de l'Université de Douala, je transforme des idées complexes en solutions numériques intuitives.
+
+                    Mon expertise ne s'arrête pas au code : je combine une maîtrise de l'architecture logicielle moderne (du backend à l'interface utilisateur) avec de solides compétences 
+                    en analyse de données et en réseaux informatiques. Cette vision 360° me permet de concevoir des applications non seulement performantes, mais aussi sécurisées et optimisées
+                     pour l'exploitation des données. Mon objectif ? Allier rigueur académique et innovation technique pour bâtir le web de demain</p>
+            </div>
+            <div class="col-md-4 d-none d-md-block text-center">
+                <div class="p-5 bg-primary text-white rounded-circle d-inline-block shadow">
+                    <i class="bi bi-code-slash display-1"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <section class="bg-light py-5" id="competences">
+    <div class="container reveal">
+        <h2 class="text-center fw-bold mb-5" id="txt-skills-title">Compétences & Outils</h2>
+        
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm skill-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3 mx-auto bg-primary bg-opacity-10 text-primary">
+                            <i class="bi bi-layers-fill fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">Fullstack Core</h4>
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                            <span class="badge bg-secondary-subtle text-dark border">HTML5</span>
+                            <span class="badge bg-secondary-subtle text-dark border">CSS3</span>
+                            <span class="badge bg-secondary-subtle text-dark border">Bootstrap</span>
+                            <span class="badge bg-secondary-subtle text-dark border">JavaScript</span>
+                            <span class="badge bg-primary">React.js</span>
+                            <span class="badge bg-dark">Node.js</span>
+                            <span class="badge bg-info text-dark">SQL</span>
+                            <span class="badge bg-success">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm skill-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3 mx-auto bg-info bg-opacity-10 text-info">
+                            <i class="bi bi-brush fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">Design</h4>
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                            <span class="badge bg-info-subtle text-dark border">PhotoFiltre</span>
+                            <span class="badge bg-info-subtle text-dark border">Canva</span>
+                            <span class="badge bg-info-subtle text-dark border">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm skill-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3 mx-auto bg-danger bg-opacity-10 text-danger">
+                            <i class="bi bi-git fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">DevOps</h4>
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                            <span class="badge bg-danger">Git</span>
+                            <span class="badge bg-dark">GitHub</span>
+                            <span class="badge bg-orange text-white" style="background-color: #f34f29;">GitLab</span>
+                            <span class="badge bg-primary">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm skill-card">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-box mb-3 mx-auto bg-warning bg-opacity-10 text-warning">
+                            <i class="bi bi-cloud-check fs-1"></i>
+                        </div>
+                        <h4 class="fw-bold">Cloud & Hosting</h4>
+                        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+                            <span class="badge bg-warning text-dark">AWS</span>
+                            <span class="badge bg-dark">Vercel</span>
+                            <span class="badge bg-secondary">Railway</span>
+                            <span class="badge bg-warning text-dark">Firebase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- carrousel infini -->
+
+<section class="py-4 bg-body border-top border-bottom d-block d-md-none overflow-hidden">
+        <div class="logos-slider">
+            <div class="logos-track">
+                <i class="bi bi-bootstrap-fill mx-4 display-5 text-primary"></i>
+                <i class="bi bi-filetype-html mx-4 display-5 text-danger"></i>
+                <i class="bi bi-react mx-4 display-5 text-info"></i>
+                <i class="bi bi-git mx-4 display-5 text-warning"></i>
+                <i class="bi bi-database mx-4 display-5 text-success"></i>
+                <i class="bi bi-bootstrap-fill mx-4 display-5 text-primary"></i>
+                <i class="bi bi-filetype-html mx-4 display-5 text-danger"></i>
+                <i class="bi bi-react mx-4 display-5 text-info"></i>
+                <i class="bi bi-git mx-4 display-5 text-warning"></i>
+                <i class="bi bi-database mx-4 display-5 text-success"></i>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- projet -->
+
+<section id="projets" class="py-5 bg-body">
+    <div class="container reveal">
+        <h2 class="text-center fw-bold mb-5">Mes Réalisations</h2>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm project-card overflow-hidden">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070" class="card-img-top project-img" alt="Coaching Santé">
+                        <div class="project-overlay">
+                            <span class="badge bg-primary mb-2">Santé & IA</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold">Coaching Santé IMC</h5>
+                        <p class="text-secondary small">Application intelligente de calcul d'IMC avec génération de bilan nutritionnel personnalisé en PDF.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="stack-icons">
+                                <i class="bi bi-filetype-js text-warning me-2"></i>
+                                <i class="bi bi-file-pdf text-danger"></i>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Détails <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm project-card overflow-hidden">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2089" class="card-img-top project-img" alt="E-commerce">
+                        <div class="project-overlay">
+                            <span class="badge bg-success mb-2">E-Commerce</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold">Marketplace Moderne</h5>
+                        <p class="text-secondary small">Plateforme de vente en ligne avec gestion de panier, paiement Stripe et dashboard administrateur.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="stack-icons">
+                                <i class="bi bi-react text-info me-2"></i>
+                                <i class="bi bi-stripe text-primary"></i>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Détails <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm project-card overflow-hidden">
+                    <div class="project-image-container">
+                        <img src="https://images.unsplash.com/photo-1551288049-bbbda5366391?q=80&w=2070" class="card-img-top project-img" alt="Data Dashboard">
+                        <div class="project-overlay">
+                            <span class="badge bg-info text-dark mb-2">Data Viz</span>
+                        </div>
+                    </div>
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold">Analyse de Flux</h5>
+                        <p class="text-secondary small">Outil de visualisation de données en temps réel pour serveurs Aiven avec graphiques interactifs.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <div class="stack-icons">
+                                <i class="bi bi-database-fill text-success me-2"></i>
+                                <i class="bi bi-bar-chart-line text-info"></i>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Détails <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="imc" class=" container py-5">
+        <div class="container reveal" id="projets">
+            <h2 class="text-center fw-bold mb-5" id="txt-skills-title">Projets</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8 card p-4 shadow border-0">
+                    <h2 class="text-center mb-4" id="txt-coaching-title"><i class="bi bi-heart-pulse text-danger"></i> Coaching Santé</h2>
+                    <form id="imcForm">
+                        <div class="row g-3">
+                            <div class="col-md-4"><input type="text" id="prenom" class="form-control" placeholder="Prénom" required></div>
+                            <div class="col-md-4"><input type="number" id="taille" class="form-control" placeholder="Taille (cm)" required></div>
+                            <div class="col-md-4"><input type="number" id="poids" class="form-control" placeholder="Poids (kg)" required></div>
+                        </div>
+                        <button type="submit" id="btn-calculate-imc" class="btn btn-primary w-100 mt-3 fw-bold">Calculer mon IMC</button>
+                    </form>
+    
+                    <div id="resultArea" class="mt-4 p-4 border rounded-3 bg-body" style="display:none;">
+                        <h4 id="imcGreeting" class="text-primary"></h4>
+                        <div id="imcAdvice" class="alert"></div>
+                        <div id="choiceBlock" class="mt-3 d-none text-center">
+                            <div class="btn-group d-none w-100">
+                                <input type="radio" class="btn-check" name="solution" id="radioRegime" value="regime">
+                                <label class="btn btn-outline-success" id="label-regime" for="radioRegime">Régime</label>
+                                <input type="radio" class="btn-check" name="solution" id="radioSport" value="sport">
+                                <label class="btn btn-outline-primary" id="label-sport" for="radioSport">Sport</label>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="dynamicForm" class="mt-4 p-4 border rounded-3 bg-light text-dark d-none">
+                        <div id="dynamicInputs"></div>
+                        <button id="btnGenerateFinal" class="btn btn-success w-100 mt-3 fw-bold">Générer mon Bilan</button>
+                    </div>
+    
+                    <div id="finalReport" class="mt-4 p-4 rounded-3 d-none bg-white text-dark shadow border-start border-5 border-success">
+                        <div id="reportContent"></div>
+                        <button id="btnDownloadPDF" class="btn btn-danger w-100 mt-3 fw-bold">PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container bg-body-secondary w-100 py-5 reveal">
+        <h2 class="text-center fw-bold mb-5" id="kanban-title">Mon Workflow (Kanban)</h2>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="kanban-col">
+                    <h5 class="fw-bold text-secondary" id="todo-text">A FAIRE (To Do)</h5>
+                    <div class="kanban-card" id="txt-kanban-seo">Optimisation SEO du site</div>
+                    <div class="kanban-card" id="txt-kanban-stripe">Intégration API Stripe</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kanban-col">
+                    <h5 class="fw-bold text-primary" id="doing-text">EN COURS (Doing)</h5>
+                    <div class="kanban-card" id="txt-kanban-portfolio">Développement Portfolio YOSSA</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="kanban-col">
+                    <h5 class="fw-bold text-success" id="done-text">TERMINÉ (Done)</h5>
+                    <div class="kanban-card" id="txt-kanban-aiven">Configuration du Serveur Aiven</div>
+                    <div class="kanban-card" id="txt-kanban-db">Architecture de la BDD</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="container py-5 reveal">
+        <h2 class="text-center fw-bold mb-5" id="txt-contact-title">Me Contacter</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <form id="contactForm">
+                    <input type="hidden" name="access_key" value="18c01063-5c9c-4be7-b4f2-faae57f5c6f9">
+                    
+                    <div class="mb-3">
+                        <input type="text" id="contact-name" name="name" class="form-control" placeholder="Nom Complet" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" id="contact-email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea id="contact-message" name="message" class="form-control" rows="4" placeholder="Votre message" required></textarea>
+                    </div>
+                    
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                
+                    <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+                        <span id="btnText">Envoyer</span>
+                    </button>
+                    <div id="formResponse" class="mt-3 text-center"></div>
+                </form>
+            </div>
+            <div class="col-md-6 text-center">
+                  <p class="lead" id="txt-social-lead">Retrouvez-moi sur les réseaux</p>
+                <div class="d-flex justify-content-center gap-4">
+                    <a href="https://www.linkedin.com/in/yossa-david" target="_blank" class="text-body social-link">
+                        <i class="bi bi-linkedin"></i>
+                    </a>
+                
+                    <a href="https://github.com/DAVID-FOLEU" target="_blank" class="text-body social-link">
+                        <i class="bi bi-github"></i>
+                    </a>
+                
+                    <a href="mailto:yossadavidfullweb@gmail.com" class="text-body social-link">
+                        <i class="bi bi-envelope-at-fill"></i>
+                    </a>
+                
+                    <a href="https://wa.me/237655288528" target="_blank" class="text-body social-link">
+                        <i class="bi bi-whatsapp"></i>
+                    </a>
+                </div>
+                <div class="mt-4">
+                    <p id="txt-location"><i class="bi bi-geo-alt-fill text-danger"></i> Douala, Cameroun</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-body-tertiary py-4 mt-5 text-center border-top">
+        <p class="mb-0"><strong>YOSSA DAVID</strong> - <span id="footer-desc"> Développeur de ce site avec amour ❤️ </span></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 1. GESTION DES LANGUES
+        let currentLang = 'fr';
+
+        const translations = {
+    fr: {
+        "navAbout": "À propos",
+        "navSkills": "Compétences",
+        "navProjects": "Projets",
+        "navContact": "Contact",
+        "welcome": "Bienvenue sur mon Portfolio",
+        "vision": "Concevoir le futur",
+        "visionSub": "Des applications robustes et scalables.",
+        "ctaContact": "Me contacter",
+        "ctaWork": "Voir mes travaux",
+        "btnLang": "EN",
+        "aboutTitle": "À Propos",
+        "aboutP": "Développeur Fullstack passionné et titulaire d'une Licence en Informatique de l'Université de Douala, je transforme des idées complexes en solutions numériques intuitives. Mon expertise combine architecture logicielle, analyse de données et réseaux pour bâtir le web de demain.",
+        "txt-skills-title": "Projets",
+        "txt-coaching-title": "Coaching Santé",
+        "prenom": "Prénom",
+        "taille": "Taille (cm)",
+        "poids": "Poids (kg)",
+        "btn-calculate-imc": "Calculer mon IMC",
+        "label-regime": "Régime",
+        "label-sport": "Sport",
+        "btnGenerateFinal": "Générer mon Bilan",
+        "btnDownloadPDF": "PDF",
+        "kanban-title": "Mon Workflow (Kanban)",
+        "todo-text": "À FAIRE (To Do)",
+        "doing-text": "EN COURS (Doing)",
+        "done-text": "TERMINÉ (Done)",
+        "txt-kanban-seo": "Optimisation SEO du site",
+        "txt-kanban-stripe": "Intégration API Stripe",
+        "txt-kanban-portfolio": "Développement Portfolio YOSSA",
+        "txt-kanban-aiven": "Configuration du Serveur Aiven",
+        "txt-kanban-db": "Architecture de la BDD",
+        "txt-contact-title": "Me Contacter",
+        "txt-social-lead": "Retrouvez-moi sur les réseaux",
+        "contact-name": "Nom Complet",
+        "contact-email": "Email",
+        "contact-message": "Votre message",
+        "btnText": "Envoyer",
+        "txt-location": "Douala, Cameroun",
+        "nav-propos": "À propos",
+        "nav-competenes": "Compétences",
+        "nav-projets": "Projets",
+        "nav-contacts": "Contact",
+        "footer-desc": "Développeur de ce site avec amour ❤️",
+        "txt-kanban-seo": "Optimisation SEO du site",
+        "txt-kanban-stripe": "Intégration API Stripe",
+        "txt-kanban-portfolio": "Développement Portfolio YOSSA",
+        "txt-kanban-aiven": "Configuration du Serveur Aiven",
+        "txt-kanban-db": "Architecture de la BDD",
+        "imc-hello": "Bonjour",
+        "imc-your-is": "Votre IMC est de",
+        "imc-thin": "Vous êtes en situation de maigreur. Il est important de veiller à un apport nutritionnel suffisant.",
+        "imc-normal": "Vous avez une corpulence normale. Félicitations, continuez ainsi !",
+        "imc-overweight": "Vous êtes en surpoids. Un petit rééquilibrage pourrait vous être bénéfique. Nous vous conseillons de suivre nos recommandations personnalisées.",
+        "imc-obese": "Votre IMC indique une obésité. Nous vous conseillons de suivre nos recommandations personnalisées."
+    },
+    en: {
+        "navAbout": "About",
+        "navSkills": "Skills",
+        "navProjects": "Projects",
+        "navContact": "Contact",
+        "welcome": "Welcome to my Portfolio",
+        "vision": "Engineering the Future",
+        "visionSub": "Robust and scalable applications.",
+        "ctaContact": "Contact Me",
+        "ctaWork": "View my work",
+        "btnLang": "FR",
+        "aboutTitle": "About Me",
+        "aboutP": "Passionate Fullstack Developer with a Bachelor's in Computer Science from the University of Douala. I transform complex ideas into intuitive digital solutions, combining software architecture, data analysis, and networking to build tomorrow's web.",
+        "txt-skills-title": "Projects",
+        "txt-coaching-title": "Health Coaching",
+        "prenom": "First Name",
+        "taille": "Height (cm)",
+        "poids": "Weight (kg)",
+        "btn-calculate-imc": "Calculate my BMI",
+        "label-regime": "Diet",
+        "label-sport": "Workout",
+        "btnGenerateFinal": "Generate my Report",
+        "btnDownloadPDF": "PDF",
+        "kanban-title": "My Workflow (Kanban)",
+        "todo-text": "TO DO",
+        "doing-text": "IN PROGRESS",
+        "done-text": "DONE",
+        "txt-kanban-seo": "Site SEO Optimization",
+        "txt-kanban-stripe": "Stripe API Integration",
+        "txt-kanban-portfolio": "YOSSA Portfolio Development",
+        "txt-kanban-aiven": "Aiven Server Configuration",
+        "txt-kanban-db": "Database Architecture",
+        "txt-contact-title": "Contact Me",
+        "txt-social-lead": "Find me on social media",
+        "contact-name": "Full Name",
+        "contact-email": "Email",
+        "contact-message": "Your message",
+        "btnText": "Send",
+        "txt-location": "Douala, Cameroon",
+        "nav-propos": "About",
+        "nav-competenes": "Skills",
+        "nav-projets": "Projects",
+        "nav-contacts": "Contact",
+        "footer-desc": "Developer of this site with love ❤️",
+        "txt-kanban-seo": "Site SEO Optimization",
+        "txt-kanban-stripe": "Stripe API Integration",
+        "txt-kanban-portfolio": "YOSSA Portfolio Development",
+        "txt-kanban-aiven": "Aiven Server Configuration",
+        "txt-kanban-db": "Database Architecture",
+        "imc-hello": "Hello",
+        "imc-your-is": "Your BMI is",
+        "imc-thin": "You are underweight. It is important to ensure sufficient nutritional intake.",
+        "imc-normal": "You have a normal build. Congratulations, keep it up!",
+        "imc-overweight": "You are overweight. A little rebalancing could be beneficial. We advise you to follow our personalized recommendations.",
+        "imc-obese": "Your BMI indicates obesity. We advise you to follow our personalized recommendations."
+    }
+};
+
+document.getElementById('langToggle').addEventListener('click', function() {
+    currentLang = currentLang === 'fr' ? 'en' : 'fr';
+    
+    // Mise à jour du bouton de langue
+    this.innerText = translations[currentLang].btnLang;
+    
+   // --- NAVIGATION ---
+   document.getElementById('nav-propos').innerText = translations[currentLang]["nav-propos"];
+    document.getElementById('nav-competenes').innerText = translations[currentLang]["nav-competenes"];
+    document.getElementById('nav-projets').innerText = translations[currentLang]["nav-projets"];
+    document.getElementById('nav-contacts').innerText = translations[currentLang]["nav-contacts"];
+
+    // --- KANBAN (Cartes spécifiques) ---
+    document.getElementById('kanban-title').innerText = translations[currentLang]["kanban-title"];
+    document.getElementById('todo-text').innerText = translations[currentLang]["todo-text"];
+    document.getElementById('doing-text').innerText = translations[currentLang]["doing-text"];
+    document.getElementById('done-text').innerText = translations[currentLang]["done-text"];
+    
+    document.getElementById('txt-kanban-seo').innerText = translations[currentLang]["txt-kanban-seo"];
+    document.getElementById('txt-kanban-stripe').innerText = translations[currentLang]["txt-kanban-stripe"];
+    document.getElementById('txt-kanban-portfolio').innerText = translations[currentLang]["txt-kanban-portfolio"];
+    document.getElementById('txt-kanban-aiven').innerText = translations[currentLang]["txt-kanban-aiven"];
+    document.getElementById('txt-kanban-db').innerText = translations[currentLang]["txt-kanban-db"];
+
+    // --- FOOTER ---
+    document.getElementById('footer-desc').innerText = translations[currentLang]["footer-desc"];
+    // --- SECTION HERO & NAVIGATION ---
+    document.getElementById('txt-welcome').innerText = translations[currentLang].welcome;
+    document.getElementById('txt-cta-contact').innerText = translations[currentLang].ctaContact;
+    document.getElementById('txt-vision').innerText = translations[currentLang].vision;
+    document.getElementById('txt-vision-sub').innerText = translations[currentLang].visionSub;
+    document.getElementById('txt-cta-work').innerText = translations[currentLang].ctaWork;
+
+    // --- SECTION À PROPOS ---
+    document.getElementById('txt-about-title').innerText = translations[currentLang].aboutTitle;
+    document.getElementById('txt-about-p').innerText = translations[currentLang].aboutP;
+
+    // --- SECTION PROJETS / IMC ---
+    document.getElementById('txt-skills-title').innerText = translations[currentLang].navSkills;
+    document.getElementById('txt-coaching-title').innerText = translations[currentLang].aboutTitle; // Titre Coaching
+    document.getElementById('prenom').placeholder = translations[currentLang].prenom;
+    document.getElementById('taille').placeholder = translations[currentLang].taille;
+    document.getElementById('poids').placeholder = translations[currentLang].poids;
+    document.getElementById('btn-calculate-imc').innerText = translations[currentLang]["btn-calculate-imc"];
+    document.getElementById('label-regime').innerText = translations[currentLang]["label-regime"];
+    document.getElementById('label-sport').innerText = translations[currentLang]["label-sport"];
+    document.getElementById('btnGenerateFinal').innerText = translations[currentLang].btnGenerateFinal;
+
+    // --- SECTION KANBAN ---
+    document.getElementById('kanban-title').innerText = translations[currentLang]["kanban-title"];
+    document.getElementById('todo-text').innerText = translations[currentLang]["todo-text"];
+    document.getElementById('doing-text').innerText = translations[currentLang]["doing-text"];
+    document.getElementById('done-text').innerText = translations[currentLang]["done-text"];
+
+    // --- SECTION CONTACT ---
+    document.getElementById('txt-contact-title').innerText = translations[currentLang]["txt-contact-title"];
+    document.getElementById('txt-social-lead').innerText = translations[currentLang]["txt-social-lead"];
+    document.getElementById('contact-name').placeholder = translations[currentLang]["contact-name"];
+    document.getElementById('contact-email').placeholder = translations[currentLang]["contact-email"];
+    document.getElementById('contact-message').placeholder = translations[currentLang]["contact-message"];
+    document.getElementById('btnText').innerText = translations[currentLang].btnText;
+    document.getElementById('txt-location').innerText = translations[currentLang]["txt-location"];
+});
+
+        // 2. GESTION DU MODE SOMBRE
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-bs-theme', newTheme);
+            themeIcon.className = newTheme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+        });
+
+        // 3. ANIMATION AU SCROLL (REVEAL)
+        window.addEventListener('scroll', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const revealTop = reveal.getBoundingClientRect().top;
+                const revealPoint = 150;
+                if (revealTop < windowHeight - revealPoint) {
+                    reveal.classList.add('active');
+                }
+            });
+        });
+
+
+        //  new
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const imcForm = document.getElementById('imcForm');
+            const resultArea = document.getElementById('resultArea');
+            const dynamicForm = document.getElementById('dynamicForm');
+            const finalReport = document.getElementById('finalReport');
+            const backToTop = document.getElementById('backToTop');
+
+            let userData = {};
+
+            // Bouton Remonter (Affichage au scroll)
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.style.display = "block";
+                } else {
+                    backToTop.style.display = "none";
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Logique IMC (Simplifiée pour la fusion)
+            imcForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                userData.prenom = document.getElementById('prenom').value;
+                const h = document.getElementById('taille').value / 100;
+                const w = document.getElementById('poids').value;
+                userData.imc = (w / (h * h)).toFixed(1);
+
+                resultArea.style.display = 'block';
+// On récupère la salutation traduite
+document.getElementById('imcGreeting').innerText = `${translations[currentLang]["imc-hello"]} ${userData.prenom}`;
+
+const advice = document.getElementById('imcAdvice');
+let messageIMC = "";
+let couleurMessage = "";
+
+// Logique de diagnostic
+if (userData.imc < 18.5) {
+    messageIMC = translations[currentLang]["imc-thin"];
+    couleurMessage = "#ffc107"; 
+} else if (userData.imc >= 18.5 && userData.imc <= 24.9) {
+    messageIMC = translations[currentLang]["imc-normal"];
+    couleurMessage = "#28a745"; 
+} else if (userData.imc >= 25 && userData.imc <= 29.9) {
+    messageIMC = translations[currentLang]["imc-overweight"];
+    couleurMessage = "#fd7e14"; 
+    document.querySelector('.btn-group').classList.remove('d-none');
+} else {
+    messageIMC = translations[currentLang]["imc-obese"];
+    couleurMessage = "#dc3545"; 
+    document.querySelector('.btn-group').classList.remove('d-none');
+}
+
+// Affichage du texte combiné avec le préfixe traduit "Votre IMC est de"
+advice.innerHTML = `${translations[currentLang]["imc-your-is"]} <strong>${userData.imc}</strong>. <br> <span style="color: ${couleurMessage}">${messageIMC}</span>`;
+// Affichage du bloc de choix si IMC > 25
+if (userData.imc > 25) {
+    document.getElementById('choiceBlock').classList.remove('d-none');
+} else {
+    // Optionnel : si l'IMC est normal, on peut quand même proposer des conseils bien-être
+    document.getElementById('choiceBlock').classList.remove('d-none'); 
+}
+
+dynamicForm.classList.add('d-none');
+finalReport.classList.add('d-none');
+            });
+
+            document.querySelectorAll('input[name="solution"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    userData.choix = e.target.value;
+                    dynamicForm.classList.remove('d-none');
+                    finalReport.classList.add('d-none');
+                    document.getElementById('dynamicInputs').innerHTML = `
+                        <div class="mb-2"><label>Âge</label><input type="number" id="age" class="form-control" required></div>
+                        <div class="mb-2"><label>${userData.choix === 'regime' ? 'Allergies ?' : 'Cardio ?'}</label><input type="text" id="extraInfo" class="form-control"></div>`;
+                });
+            });
+
+            document.getElementById('btnGenerateFinal').addEventListener('click', async () => {
+    const ageInput = document.getElementById('age');
+    const extraInput = document.getElementById('extraInfo');
+    const btn = document.getElementById('btnGenerateFinal');
+    const reportContent = document.getElementById('reportContent');
+
+    // 1. Validation de l'âge
+    if (!ageInput.value) {
+        return alert("Veuillez entrer votre âge pour continuer.");
+    }
+
+    // 2. Préparation de l'interface (Chargement)
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Analyse IA en cours...';
+    
+    // 3. Préparation des données à envoyer
+    const payload = {
+        prenom: userData.prenom,
+        imc: userData.imc,
+        choix: userData.choix,
+        age: ageInput.value,
+        details_sante: extraInput ? extraInput.value : "Aucun"
+    };
+
+    try {
+        // 4. Envoi au serveur Node.js (localhost:5000)
+        const response = await fetch('http://localhost:5000/api/coaching', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error('Erreur serveur');
+
+        const data = await response.json();
+
+        // 5. Affichage du résultat de l'IA
+        finalReport.classList.remove('d-none');
+        reportContent.innerHTML = `
+            <div class="alert alert-info">
+                <h4 class="alert-heading"><i class="bi bi-robot"></i> Bilan personnalisé pour ${userData.prenom}</h4>
+                <hr>
+                <div class="ai-response">
+                    ${data.reponse_ia}
+                </div>
+                <p class="mt-3 mb-0"><small><i>Ce conseil est généré par l'IA Gemini.</i></small></p>
+            </div>
+        `;
+
+        // Sauvegarde pour le PDF
+        userData.planIA = data.reponse_ia;
+
+    } catch (error) {
+        console.error("Erreur:", error);
+        alert("Impossible de contacter le serveur IA. Vérifie que ton serveur Node.js est bien lancé sur le port 5000.");
+    } finally {
+        // 6. Rétablir le bouton
+        btn.disabled = false;
+        btn.innerHTML = 'Générer mon Bilan';
+    }
+});
+
+    //   pour telecharger le pdf
+
+    document.getElementById('btnDownloadPDF').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const margin = 20;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const contentWidth = pageWidth - (margin * 2);
+
+    // 1. En-tête du document
+    doc.setFillColor(13, 110, 253); // Bleu Bootstrap
+    doc.rect(0, 0, pageWidth, 40, 'F');
+    
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(22);
+    doc.text("BILAN SANTÉ IA", margin, 25);
+    
+    // 2. Infos utilisateur
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Patient : ${userData.prenom}`, margin, 55);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Âge : ${document.getElementById('age').value} ans`, margin, 65);
+    doc.text(`IMC calculé : ${userData.imc}`, margin, 75);
+    doc.text(`Option choisie : ${userData.choix.toUpperCase()}`, margin, 85);
+
+    doc.setLineWidth(0.5);
+    doc.line(margin, 95, pageWidth - margin, 95);
+
+    // 3. Contenu de l'IA (Nettoyage du HTML pour le PDF)
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("Conseils personnalisés de Gemini :", margin, 110);
+    
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    
+    // On enlève les balises HTML pour que le texte soit propre dans le PDF
+    const cleanText = userData.planIA.replace(/<[^>]*>/g, '');
+    
+    // splitTextToSize gère les retours à la ligne automatiques
+    const textLines = doc.splitTextToSize(cleanText, contentWidth);
+    doc.text(textLines, margin, 120);
+
+    // 4. Pied de page
+    doc.setFontSize(10);
+    doc.setTextColor(150);
+    doc.text("Généré par le Portfolio de YOSSA DAVID - Expert Fullstack", margin, 280);
+
+    // 5. Sauvegarde et Réinitialisation
+    doc.save(`Bilan_Sante_${userData.prenom}.pdf`);
+
+    // Reset du formulaire après 2 secondes pour laisser le temps au téléchargement
+    setTimeout(() => {
+        alert("Bilan enregistré ! Le formulaire va être réinitialisé.");
+        location.reload(); // Solution la plus propre pour vider tous les états (IMC, IA, etc.)
+    }, 2000);
+});
+
+
+
+            // Reveal Animation
+            window.addEventListener('scroll', () => {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+                });
+            });
+
+
+           
+});
+
+
+//lettre par lettre
+
+const texts = {
+    "type-welcome": "Bienvenue sur mon Portfolio",
+    "type-vision": "Concevoir le futur"
+};
+
+function typeEffect(elementId, text, speed = 100) {
+    let i = 0;
+    const element = document.getElementById(elementId);
+    element.innerHTML = ""; // On vide le texte au départ
+    
+    function type() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    type();
+}
+
+// Lancement au chargement
+document.addEventListener("DOMContentLoaded", () => {
+    typeEffect("type-welcome", texts["type-welcome"]);
+});
+
+// Relancer l'effet quand le carousel change
+const carousel = document.getElementById('heroCarousel');
+carousel.addEventListener('slid.bs.carousel', function (event) {
+    const activeItem = event.relatedTarget;
+    const span = activeItem.querySelector('h1 span[id]');
+    if (span) {
+        typeEffect(span.id, texts[span.id]);
+    }
+});
+    </script>
+</body>
+</html>
