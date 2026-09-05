@@ -14,7 +14,11 @@
     <script src="https://unpkg.com/scrollreveal"></script>
    <style>
         :root { --transition-speed: 0.5s; }
-        body { transition: background-color var(--transition-speed), color var(--transition-speed); scroll-behavior: smooth; }
+        body { transition: background-color var(--transition-speed),
+             color var(--transition-speed); 
+             scroll-behavior: smooth;
+            overflow-x: hidden; /* Empêche le défilement horizontal */
+        width: 100%;}
         
       .custom-logo {
         /* Utilise 'rem' pour s'adapter à la taille de police globale ou 'vh/vw' pour l'écran */
@@ -26,7 +30,7 @@
     }
 
          .nav-link{
-            font-size: 1.2rem ;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             font-weight: bold;
          }
 
@@ -65,7 +69,7 @@
 
             /* --- Barre au survol APRÈS le scroll (Devient Bleu Bootstrap) --- */
             .navbar-custom.scrolled .nav-link::after {
-                background-color: #0a0a0a; /* Changement de couleur vers le bleu */
+                background-color: #023d78; /* Changement de couleur vers le bleu */
             }
 
             .navbar-custom .nav-link:hover::after,
@@ -82,7 +86,7 @@
 
             /* Couleurs des liens au scroll (Fond blanc -> Liens sombres) */
             .navbar-custom.scrolled .nav-link {
-                color: #212529 !important;
+                color: #023d78 !important;
             }
 
             .navbar-custom.scrolled #nom {
@@ -503,7 +507,7 @@
 
         <!-- Liens du menu (suppression de 'text-body') -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
+            <ul class="navbar-nav ms-lg-auto align-items-start align-items-lg-center">
                 <li class="nav-item"><a class="nav-link" href="#propos" id="nav-propos">À propos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#competences" id="nav-competenes">Compétences</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projets" id="nav-projets">Projets</a></li>
