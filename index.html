@@ -527,25 +527,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-lg-auto align-items-start align-items-lg-center">
                 <li class="nav-item">
-                    <a class="nav-link text-body d-flex align-items-center gap-2" href="#propos" id="nav-propos">
+                    <a class="nav-link  d-flex align-items-center gap-2" href="#propos" id="nav-propos">
                         <i class="bi bi-person-fill d-lg-none"></i>
                         <span>À propos</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-body d-flex align-items-center gap-2" href="#competences" id="nav-competenes">
+                    <a class="nav-link  d-flex align-items-center gap-2" href="#competences" id="nav-competenes">
                         <i class="bi bi-gear-wide-connected d-lg-none"></i>
                         <span>Compétences</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-body d-flex align-items-center gap-2" href="#projets" id="nav-projets">
+                    <a class="nav-link  d-flex align-items-center gap-2" href="#projets" id="nav-projets">
                         <i class="bi bi-folder-symlink-fill d-lg-none"></i>
                         <span>Projets</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-body d-flex align-items-center gap-2" href="#contact" id="nav-contacts">
+                    <a class="nav-link  d-flex align-items-center gap-2" href="#contact" id="nav-contacts">
                         <i class="bi bi-envelope-fill d-lg-none"></i>
                         <span>Contact</span>
                     </a>
@@ -971,28 +971,25 @@
 
     <script>
 
+// pour fermer la nav apres un clic sur un lien (mobile)
+
+document.addEventListener('DOMContentLoaded', () => {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  const navbarCollapse = document.getElementById('navbarNav');
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      // Vérifie si le menu est actuellement ouvert sur mobile
+      if (navbarCollapse.classList.contains('show')) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) 
+          || new bootstrap.Collapse(navbarCollapse);
         
+        bsCollapse.hide(); // Ferme le menu
+      }
+    });
+  });
+});
 
-//     document.addEventListener("DOMContentLoaded", function() {
-//     const observerOptions = {
-//         root: null,
-//         rootMargin: "0px",
-//         threshold: 0.15 // Déclenche l'animation quand 15% de l'élément est visible
-//     };
-
-//     const observer = new IntersectionObserver((entries, observer) => {
-//         entries.forEach(entry => {
-//             if (entry.isIntersecting) {
-//                 entry.target.classList.add("active");
-//                 // Optionnel : observer.unobserve(entry.target); // Si vous voulez animer une seule fois
-//             }
-//         });
-//     }, observerOptions);
-
-//     // Sélectionne tous les éléments possédant une des classes reveal
-//     const targets = document.querySelectorAll(".reveal-left, .reveal-right, .reveal-top, .reveal-bottom");
-//     targets.forEach(target => observer.observe(target));
-// });
 
 document.addEventListener("DOMContentLoaded", function () {
     // Initialisation de ScrollReveal
